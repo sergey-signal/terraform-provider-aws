@@ -196,6 +196,7 @@ func resourceAcceleratorRead(ctx context.Context, d *schema.ResourceData, meta i
 	}
 
 	d.Set("dns_name", accelerator.DnsName)
+	d.Set("dual_stack_dns_name", accelerator.DualStackDnsName)
 	d.Set("enabled", accelerator.Enabled)
 	d.Set("hosted_zone_id", route53ZoneID)
 	d.Set("ip_address_type", accelerator.IpAddressType)

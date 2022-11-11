@@ -160,6 +160,7 @@ func (d *dataSourceAccelerator) Read(ctx context.Context, request datasource.Rea
 		data.ARN = fwtypes.ARN{Value: v}
 	}
 	data.DnsName = types.String{Value: aws.StringValue(accelerator.DnsName)}
+	data.DualStackDnsName = types.String{Value: aws.StringValue(accelerator.DualStackDnsName)}
 	data.Enabled = types.Bool{Value: aws.BoolValue(accelerator.Enabled)}
 	data.HostedZoneID = types.String{Value: route53ZoneID}
 	data.ID = types.String{Value: acceleratorARN}
@@ -191,16 +192,17 @@ func (d *dataSourceAccelerator) Read(ctx context.Context, request datasource.Rea
 }
 
 type dataSourceAcceleratorData struct {
-	ARN           fwtypes.ARN  `tfsdk:"arn"`
-	Attributes    types.List   `tfsdk:"attributes"`
-	DnsName       types.String `tfsdk:"dns_name"`
-	Enabled       types.Bool   `tfsdk:"enabled"`
-	HostedZoneID  types.String `tfsdk:"hosted_zone_id"`
-	ID            types.String `tfsdk:"id"`
-	IpAddressType types.String `tfsdk:"ip_address_type"`
-	IpSets        types.List   `tfsdk:"ip_sets"`
-	Name          types.String `tfsdk:"name"`
-	Tags          types.Map    `tfsdk:"tags"`
+	ARN              fwtypes.ARN  `tfsdk:"arn"`
+	Attributes       types.List   `tfsdk:"attributes"`
+	DnsName          types.String `tfsdk:"dns_name"`
+	DualStackDnsName types.String `tfsdk:"dual_stack_dns_name"`
+	Enabled          types.Bool   `tfsdk:"enabled"`
+	HostedZoneID     types.String `tfsdk:"hosted_zone_id"`
+	ID               types.String `tfsdk:"id"`
+	IpAddressType    types.String `tfsdk:"ip_address_type"`
+	IpSets           types.List   `tfsdk:"ip_sets"`
+	Name             types.String `tfsdk:"name"`
+	Tags             types.Map    `tfsdk:"tags"`
 }
 
 func flattenIPSetFramework(ctx context.Context, apiObject *globalaccelerator.IpSet) types.Object {

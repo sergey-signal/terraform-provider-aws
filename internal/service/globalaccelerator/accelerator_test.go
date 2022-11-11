@@ -23,6 +23,7 @@ func TestAccGlobalAcceleratorAccelerator_basic(t *testing.T) {
 	rName := sdkacctest.RandomWithPrefix(acctest.ResourcePrefix)
 	ipRegex := regexp.MustCompile(`\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`)
 	dnsNameRegex := regexp.MustCompile(`^a[a-f0-9]{16}\.awsglobalaccelerator\.com$`)
+	dualStackDnsNameRegex := regexp.MustCompile(`^a[a-f0-9]{16}\.dualstack\.awsglobalaccelerator\.com$`)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t); testAccPreCheck(t) },
@@ -39,6 +40,7 @@ func TestAccGlobalAcceleratorAccelerator_basic(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "attributes.0.flow_logs_s3_bucket", ""),
 					resource.TestCheckResourceAttr(resourceName, "attributes.0.flow_logs_s3_prefix", ""),
 					resource.TestMatchResourceAttr(resourceName, "dns_name", dnsNameRegex),
+					resource.TestMatchResourceAttr(resourceName, "dual_stack_dns_name", dualStackDnsNameRegex),
 					resource.TestCheckResourceAttr(resourceName, "enabled", "true"),
 					resource.TestCheckResourceAttr(resourceName, "hosted_zone_id", "Z2BJ6XQ5FK7U4H"),
 					resource.TestCheckResourceAttr(resourceName, "ip_address_type", "IPV4"),
